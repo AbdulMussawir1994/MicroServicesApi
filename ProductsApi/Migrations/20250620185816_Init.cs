@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProductsApi.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -46,9 +46,9 @@ namespace ProductsApi.Migrations
                 columns: new[] { "ProductId", "CreatedBy", "CreatedDate", "ImageUrl", "ProductCategory", "ProductDescription", "ProductName", "ProductPrice" },
                 values: new object[,]
                 {
-                    { "1", "Seeder", new DateTime(2025, 6, 13, 13, 47, 53, 581, DateTimeKind.Utc).AddTicks(1239), "https://example.com/images/mouse.jpg", "Electronics", "Ergonomic wireless mouse with 2.4GHz connection", "Wireless Mouse", 29.99m },
-                    { "2", "Seeder", new DateTime(2025, 6, 13, 13, 47, 53, 581, DateTimeKind.Utc).AddTicks(1243), "https://example.com/images/speaker.jpg", "Audio", "Portable Bluetooth speaker with HD sound", "Bluetooth Speaker", 49.99m },
-                    { "3", "Seeder", new DateTime(2025, 6, 13, 13, 47, 53, 581, DateTimeKind.Utc).AddTicks(1246), "https://example.com/images/watch.jpg", "Wearables", "Fitness tracking smart watch with heart rate monitor", "Smart Watch", 99.99m }
+                    { "1", "Seeder", new DateTime(2025, 6, 20, 18, 58, 13, 383, DateTimeKind.Utc).AddTicks(3694), "https://example.com/images/mouse.jpg", "Electronics", "Ergonomic wireless mouse with 2.4GHz connection", "Wireless Mouse", 29.99m },
+                    { "2", "Seeder", new DateTime(2025, 6, 20, 18, 58, 13, 383, DateTimeKind.Utc).AddTicks(3698), "https://example.com/images/speaker.jpg", "Audio", "Portable Bluetooth speaker with HD sound", "Bluetooth Speaker", 49.99m },
+                    { "3", "Seeder", new DateTime(2025, 6, 20, 18, 58, 13, 383, DateTimeKind.Utc).AddTicks(3701), "https://example.com/images/watch.jpg", "Wearables", "Fitness tracking smart watch with heart rate monitor", "Smart Watch", 99.99m }
                 });
         }
 

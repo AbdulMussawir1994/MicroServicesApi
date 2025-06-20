@@ -25,7 +25,8 @@ namespace MicroServicesApi.Controllers
         }
 
         [HttpPost("RegisterUser")]
-        [AllowAnonymous]
+        // [AllowAnonymous]
+        [Authorize]
         public async Task<IActionResult> RegisterUser([FromBody] RegisterViewModel model, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)

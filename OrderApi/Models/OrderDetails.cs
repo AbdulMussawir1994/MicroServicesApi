@@ -7,10 +7,8 @@ public class OrderDetails
 {
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int OrderDetailsId { get; set; }
-    public string ProductId { get; set; } = Guid.NewGuid().ToString();
+    public string ProductId { get; set; } = string.Empty; // = Guid.NewGuid().ToString();
     public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
-    //[NotMapped]
-    //public ProductDto? Product { get; set; }
     public int Count { get; set; }
     public string ProductName { get; set; }
 

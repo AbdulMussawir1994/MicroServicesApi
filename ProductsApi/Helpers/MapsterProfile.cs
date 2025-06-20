@@ -23,11 +23,12 @@ public sealed class MapsterProfile : TypeAdapterConfig
             .Map(x => x.createdBy, map => map.CreatedBy)
             .IgnoreNullValues(true);
 
-        //TypeAdapterConfig<CreateEmployeeDto, Employee>.NewConfig()
-        //    .Map(x => x.Name, map => map.Name)
-        //    .Map(x => x.Email, map => map.Email)
-        //    .Map(x => x.Salary, map => map.Salary)
-        //    .Map(x => x.DepartmentId, map => map.DepartmentId)
-        //   .IgnoreNullValues(true);
+        TypeAdapterConfig<CreateProductDto, Product>.NewConfig()
+            .Map(x => x.ProductName, map => map.ProductName)
+            .Map(x => x.ProductDescription, map => map.ProductDescription)
+            .Map(x => x.ProductCategory, map => map.ProductCategory)
+            .Map(x => x.ProductPrice, map => map.ProductPrice)
+            .Map(x => x.ImageUrl, map => map.ImageUrl)
+           .IgnoreNullValues(true);
     }
 }

@@ -35,9 +35,9 @@ namespace OrderApi.Migrations
                 columns: new[] { "OrderDetailsId", "Count", "CreatedDate", "Price", "ProductId", "ProductName" },
                 values: new object[,]
                 {
-                    { 1, 5, new DateTime(2025, 6, 13, 18, 34, 47, 345, DateTimeKind.Utc).AddTicks(3124), 29.99m, "1", "Wireless Mouse" },
-                    { 2, 5, new DateTime(2025, 6, 13, 18, 34, 47, 345, DateTimeKind.Utc).AddTicks(3127), 49.99m, "2", "Bluetooth Speaker" },
-                    { 3, 5, new DateTime(2025, 6, 13, 18, 34, 47, 345, DateTimeKind.Utc).AddTicks(3130), 99.99m, "3", "Smart Watch" }
+                    { 1, 5, new DateTime(2025, 6, 20, 18, 57, 25, 332, DateTimeKind.Utc).AddTicks(2434), 29.99m, "1", "Wireless Mouse" },
+                    { 2, 5, new DateTime(2025, 6, 20, 18, 57, 25, 332, DateTimeKind.Utc).AddTicks(2436), 49.99m, "2", "Bluetooth Speaker" },
+                    { 3, 5, new DateTime(2025, 6, 20, 18, 57, 25, 332, DateTimeKind.Utc).AddTicks(2437), 99.99m, "3", "Smart Watch" }
                 });
 
             migrationBuilder.CreateIndex(

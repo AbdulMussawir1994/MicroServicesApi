@@ -12,7 +12,7 @@ using OrderApi.DbContextClass;
 namespace OrderApi.Migrations
 {
     [DbContext(typeof(DataDbContext))]
-    [Migration("20250613183454_Init")]
+    [Migration("20250620185729_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -69,7 +69,7 @@ namespace OrderApi.Migrations
                         {
                             OrderDetailsId = 1,
                             Count = 5,
-                            CreatedDate = new DateTime(2025, 6, 13, 18, 34, 47, 345, DateTimeKind.Utc).AddTicks(3124),
+                            CreatedDate = new DateTime(2025, 6, 20, 18, 57, 25, 332, DateTimeKind.Utc).AddTicks(2434),
                             Price = 29.99m,
                             ProductId = "1",
                             ProductName = "Wireless Mouse"
@@ -78,7 +78,7 @@ namespace OrderApi.Migrations
                         {
                             OrderDetailsId = 2,
                             Count = 5,
-                            CreatedDate = new DateTime(2025, 6, 13, 18, 34, 47, 345, DateTimeKind.Utc).AddTicks(3127),
+                            CreatedDate = new DateTime(2025, 6, 20, 18, 57, 25, 332, DateTimeKind.Utc).AddTicks(2436),
                             Price = 49.99m,
                             ProductId = "2",
                             ProductName = "Bluetooth Speaker"
@@ -87,7 +87,7 @@ namespace OrderApi.Migrations
                         {
                             OrderDetailsId = 3,
                             Count = 5,
-                            CreatedDate = new DateTime(2025, 6, 13, 18, 34, 47, 345, DateTimeKind.Utc).AddTicks(3130),
+                            CreatedDate = new DateTime(2025, 6, 20, 18, 57, 25, 332, DateTimeKind.Utc).AddTicks(2437),
                             Price = 99.99m,
                             ProductId = "3",
                             ProductName = "Smart Watch"

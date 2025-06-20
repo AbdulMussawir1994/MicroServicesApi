@@ -12,8 +12,8 @@ using ProductsApi.DataContextClass;
 namespace ProductsApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250613134756_init")]
-    partial class init
+    [Migration("20250620185816_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -74,7 +74,7 @@ namespace ProductsApi.Migrations
                         {
                             ProductId = "1",
                             CreatedBy = "Seeder",
-                            CreatedDate = new DateTime(2025, 6, 13, 13, 47, 53, 581, DateTimeKind.Utc).AddTicks(1239),
+                            CreatedDate = new DateTime(2025, 6, 20, 18, 58, 13, 383, DateTimeKind.Utc).AddTicks(3694),
                             ImageUrl = "https://example.com/images/mouse.jpg",
                             ProductCategory = "Electronics",
                             ProductDescription = "Ergonomic wireless mouse with 2.4GHz connection",
@@ -85,7 +85,7 @@ namespace ProductsApi.Migrations
                         {
                             ProductId = "2",
                             CreatedBy = "Seeder",
-                            CreatedDate = new DateTime(2025, 6, 13, 13, 47, 53, 581, DateTimeKind.Utc).AddTicks(1243),
+                            CreatedDate = new DateTime(2025, 6, 20, 18, 58, 13, 383, DateTimeKind.Utc).AddTicks(3698),
                             ImageUrl = "https://example.com/images/speaker.jpg",
                             ProductCategory = "Audio",
                             ProductDescription = "Portable Bluetooth speaker with HD sound",
@@ -96,7 +96,7 @@ namespace ProductsApi.Migrations
                         {
                             ProductId = "3",
                             CreatedBy = "Seeder",
-                            CreatedDate = new DateTime(2025, 6, 13, 13, 47, 53, 581, DateTimeKind.Utc).AddTicks(1246),
+                            CreatedDate = new DateTime(2025, 6, 20, 18, 58, 13, 383, DateTimeKind.Utc).AddTicks(3701),
                             ImageUrl = "https://example.com/images/watch.jpg",
                             ProductCategory = "Wearables",
                             ProductDescription = "Fitness tracking smart watch with heart rate monitor",
