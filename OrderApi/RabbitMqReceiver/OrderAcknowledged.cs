@@ -1,6 +1,5 @@
 ﻿using KmacHelper.ConsumerModel;
-using OrderApi.DbContextClass;
-using OrderApi.Models;
+using OrderApi.Repository;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
@@ -10,13 +9,13 @@ namespace OrderApi.RabbitMqReceiver;
 
 public class OrderAcknowledged : BackgroundService
 {
-    private readonly IServiceProvider _serviceProvider;
+    private readonly IOrderService _serviceProvider;
     private readonly IConfiguration _configuration;
     private readonly ILogger<OrderAcknowledged> _logger;
     private IConnection _connection;
     private IModel _channel;
 
-    public OrderAcknowledged(IServiceProvider serviceProvider, IConfiguration configuration, ILogger<OrderAcknowledged> logger)
+    public OrderAcknowledged(IOrderService serviceProvider, IConfiguration configuration, ILogger<OrderAcknowledged> logger)
     {
         _serviceProvider = serviceProvider;
         _configuration = configuration;
@@ -81,7 +80,7 @@ public class OrderAcknowledged : BackgroundService
 
                 _logger.LogInformation($"Processing product: {message.ProductName} (ID: {message.ProductId})");
 
-                await ProcessOrderAsync(message, stoppingToken);
+                await ProcessOrderAsync(message);
 
                 _channel.BasicAck(ea.DeliveryTag, false);
                 _logger.LogInformation($"Successfully processed product: {message.ProductName}");
@@ -103,25 +102,9 @@ public class OrderAcknowledged : BackgroundService
         return Task.CompletedTask;
     }
 
-    private async Task ProcessOrderAsync(Product product, CancellationToken cancellationToken)
+    private async Task ProcessOrderAsync(Product product)
     {
-        using var scope = _serviceProvider.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<DataDbContext>();
-
-        var order = new OrderDetails
-        {
-            ProductId = product.ProductId,
-            ProductName = product.ProductName,
-            Stock = product.Quantity,
-            Consumer = product.Consumer ?? "Unknown Customer",
-            Status = "Confirmed",
-            CreatedDate = DateTime.UtcNow,
-            Price = product.ProductPrice,
-            UserId = product.User,
-        };
-
-        await dbContext.OrderDetails.AddAsync(order, cancellationToken);
-        await dbContext.SaveChangesAsync(cancellationToken);
+        await _serviceProvider.AutoCreateAsync(product);
     }
 
     public override Task StopAsync(CancellationToken cancellationToken)

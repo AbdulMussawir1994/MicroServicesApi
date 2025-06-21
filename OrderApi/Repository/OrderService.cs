@@ -1,4 +1,5 @@
-﻿using Mapster;
+﻿using KmacHelper.ConsumerModel;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 using OrderApi.DbContextClass;
 using OrderApi.Dtos;
@@ -31,11 +32,35 @@ namespace OrderApi.Repository
         public async Task<MobileResponse<OrderDetailsDto>> CreateAsync(CreateOrderDetailsDto model, CancellationToken ctx)
         {
             var order = model.Adapt<OrderDetails>();
+
+
             await _db.OrderDetails.AddAsync(order, ctx);
             var result = await _db.SaveChangesAsync(ctx);
             return result > 0
                 ? MobileResponse<OrderDetailsDto>.Success(order.Adapt<OrderDetailsDto>(), "Order Created")
                 : MobileResponse<OrderDetailsDto>.Fail("Creation Failed");
+        }
+
+        public async Task<MobileResponse<bool>> AutoCreateAsync(Product model)
+        {
+            var order = new OrderDetails
+            {
+                ProductId = model.ProductId,
+                ProductName = model.ProductName,
+                Stock = model.Quantity,
+                Consumer = model.Consumer ?? "Unknown Customer",
+                Status = "Confirmed",
+                CreatedDate = DateTime.UtcNow,
+                Price = model.ProductPrice,
+                UserId = model.User,
+            };
+
+            await _db.OrderDetails.AddAsync(order);
+            var result = await _db.SaveChangesAsync();
+
+            return result > 0
+                ? MobileResponse<bool>.Success(true, "Order Created")
+                : MobileResponse<bool>.Fail("Creation Failed");
         }
 
         public async Task<MobileResponse<OrderDetailsDto>> UpdateAsync(int id, CreateOrderDetailsDto model, CancellationToken ctx)
