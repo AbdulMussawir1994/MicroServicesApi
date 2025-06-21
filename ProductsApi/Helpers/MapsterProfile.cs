@@ -21,6 +21,8 @@ public sealed class MapsterProfile : TypeAdapterConfig
             .Map(x => x.price, map => map.ProductPrice)
             .Map(x => x.created, map => map.CreatedDate)
             .Map(x => x.createdBy, map => map.CreatedBy)
+            .Map(x => x.qty, map => map.Quantity)
+            .Map(x => x.image, map => map.ImageUrl)
             .IgnoreNullValues(true);
 
         TypeAdapterConfig<CreateProductDto, Product>.NewConfig()
@@ -29,6 +31,7 @@ public sealed class MapsterProfile : TypeAdapterConfig
             .Map(x => x.ProductCategory, map => map.ProductCategory)
             .Map(x => x.ProductPrice, map => map.ProductPrice)
             .Map(x => x.ImageUrl, map => map.ImageUrl)
+            .Map(x => x.Quantity, map => map.Quantity)
            .IgnoreNullValues(true);
     }
 }

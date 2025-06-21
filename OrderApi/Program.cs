@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using OrderApi.DbContextClass;
 using OrderApi.Helpers;
+using OrderApi.RabbitMqReceiver;
 using OrderApi.Repository;
 using OrderApi.Utilities.ContextHelper;
 using System.Reflection;
@@ -51,6 +52,9 @@ builder.Services.AddCors(options =>
 // ✅ Register Application Services
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IContextUser, ContextUser>();
+
+// Add Hosted Service for RabbitMQ Consumer
+builder.Services.AddHostedService<OrderConsumer>();
 
 // ✅ Mapster Config for DTO Mapping
 TypeAdapterConfig.GlobalSettings.Scan(Assembly.GetExecutingAssembly());

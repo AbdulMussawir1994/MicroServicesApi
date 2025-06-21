@@ -30,8 +30,9 @@ namespace OrderApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderDetailsId"));
 
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
+                    b.Property<string>("Consumer")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
@@ -53,6 +54,17 @@ namespace OrderApi.Migrations
                         .IsUnicode(true)
                         .HasColumnType("nvarchar(30)");
 
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Stock")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("OrderDetailsId");
 
                     b.HasIndex("OrderDetailsId")
@@ -60,35 +72,6 @@ namespace OrderApi.Migrations
                         .HasDatabaseName("IDX_OrderDetailsId)");
 
                     b.ToTable("OrderDetails", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            OrderDetailsId = 1,
-                            Count = 5,
-                            CreatedDate = new DateTime(2025, 6, 20, 18, 57, 25, 332, DateTimeKind.Utc).AddTicks(2434),
-                            Price = 29.99m,
-                            ProductId = "1",
-                            ProductName = "Wireless Mouse"
-                        },
-                        new
-                        {
-                            OrderDetailsId = 2,
-                            Count = 5,
-                            CreatedDate = new DateTime(2025, 6, 20, 18, 57, 25, 332, DateTimeKind.Utc).AddTicks(2436),
-                            Price = 49.99m,
-                            ProductId = "2",
-                            ProductName = "Bluetooth Speaker"
-                        },
-                        new
-                        {
-                            OrderDetailsId = 3,
-                            Count = 5,
-                            CreatedDate = new DateTime(2025, 6, 20, 18, 57, 25, 332, DateTimeKind.Utc).AddTicks(2437),
-                            Price = 99.99m,
-                            ProductId = "3",
-                            ProductName = "Smart Watch"
-                        });
                 });
 #pragma warning restore 612, 618
         }

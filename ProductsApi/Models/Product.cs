@@ -22,9 +22,12 @@ public class Product
     [Column(TypeName = "decimal(18,2)")]
     public decimal ProductPrice { get; set; }
 
+    [Column(TypeName = "decimal(18,2)")]
+    public decimal Quantity { get; set; }
+
     public string? ImageUrl { get; set; } // Base64, no MaxLength since it's large
 
-    public DateTime? CreatedDate { get; set; } = DateTime.UtcNow;
+    public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
     [MaxLength(50)]
     public string? CreatedBy { get; set; } = string.Empty;
 }

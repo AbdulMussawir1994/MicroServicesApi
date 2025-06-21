@@ -16,6 +16,9 @@ namespace ProductsApi.DTOs
 
         [Column(TypeName = "decimal(18,2)")]
         public decimal ProductPrice { get; set; }
+
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal Quantity { get; set; }
         public IFormFile? ImageUrl { get; set; }
     }
 
@@ -27,6 +30,8 @@ namespace ProductsApi.DTOs
         public string? ProductDescription { get; set; }
         public string? ProductCategory { get; set; }
         public decimal ProductPrice { get; set; }
+        public decimal Quantity { get; set; }
+        public string Consumer { get; set; } = string.Empty;
         public IFormFile? ImageUrl { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateModified { get; set; } = DateTime.UtcNow;

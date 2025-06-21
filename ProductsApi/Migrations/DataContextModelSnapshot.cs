@@ -33,8 +33,7 @@ namespace ProductsApi.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
 
-                    b.Property<DateTime?>("CreatedDate")
-                        .IsRequired()
+                    b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
@@ -62,44 +61,12 @@ namespace ProductsApi.Migrations
                     b.Property<decimal>("ProductPrice")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<decimal>("Quantity")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("ProductId");
 
                     b.ToTable("Product", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            ProductId = "1",
-                            CreatedBy = "Seeder",
-                            CreatedDate = new DateTime(2025, 6, 20, 18, 58, 13, 383, DateTimeKind.Utc).AddTicks(3694),
-                            ImageUrl = "https://example.com/images/mouse.jpg",
-                            ProductCategory = "Electronics",
-                            ProductDescription = "Ergonomic wireless mouse with 2.4GHz connection",
-                            ProductName = "Wireless Mouse",
-                            ProductPrice = 29.99m
-                        },
-                        new
-                        {
-                            ProductId = "2",
-                            CreatedBy = "Seeder",
-                            CreatedDate = new DateTime(2025, 6, 20, 18, 58, 13, 383, DateTimeKind.Utc).AddTicks(3698),
-                            ImageUrl = "https://example.com/images/speaker.jpg",
-                            ProductCategory = "Audio",
-                            ProductDescription = "Portable Bluetooth speaker with HD sound",
-                            ProductName = "Bluetooth Speaker",
-                            ProductPrice = 49.99m
-                        },
-                        new
-                        {
-                            ProductId = "3",
-                            CreatedBy = "Seeder",
-                            CreatedDate = new DateTime(2025, 6, 20, 18, 58, 13, 383, DateTimeKind.Utc).AddTicks(3701),
-                            ImageUrl = "https://example.com/images/watch.jpg",
-                            ProductCategory = "Wearables",
-                            ProductDescription = "Fitness tracking smart watch with heart rate monitor",
-                            ProductName = "Smart Watch",
-                            ProductPrice = 99.99m
-                        });
                 });
 #pragma warning restore 612, 618
         }

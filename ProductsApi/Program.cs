@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using ProductsApi.DataContextClass;
 using ProductsApi.Helpers;
+using ProductsApi.RabbitMqProducer;
 using ProductsApi.Repository;
 using ProductsApi.Utilities;
 using System.Reflection;
@@ -60,11 +61,14 @@ builder.Services.AddCors(options =>
 // ✅ Register Application Services
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IContextUser, ContextUser>();
+builder.Services.Configure<RabbitMqSettings>(builder.Configuration.GetSection("RabbitMQ"));
+builder.Services.AddSingleton<IRabbitMqService, RabbitMqService>();
 
 // ✅ Mapster Config for DTO Mapping
 TypeAdapterConfig.GlobalSettings.Scan(Assembly.GetExecutingAssembly());
 builder.Services.AddSingleton(new MapsterProfile());
 
+builder.Services.AddHttpClient();
 builder.Services.AddHttpContextAccessor();
 
 // JWT Authentication & Authorization
@@ -132,6 +136,8 @@ app.UseCors("AllowApi");
 app.UseResponseCaching();
 
 app.UseRouting();
+
+app.UseMiddleware<GlobalExceptionMiddleware>();
 
 app.UseAuthentication();
 app.UseAuthorization();

@@ -3,8 +3,6 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace ProductsApi.Migrations
 {
     /// <inheritdoc />
@@ -29,6 +27,7 @@ namespace ProductsApi.Migrations
                     ProductCategory = table.Column<string>(type: "varchar(30)", unicode: false, maxLength: 30, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ProductPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ImageUrl = table.Column<string>(type: "longtext", unicode: false, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CreatedDate = table.Column<DateTime>(type: "timestamp", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
@@ -40,16 +39,6 @@ namespace ProductsApi.Migrations
                     table.PrimaryKey("PK_Product", x => x.ProductId);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.InsertData(
-                table: "Product",
-                columns: new[] { "ProductId", "CreatedBy", "CreatedDate", "ImageUrl", "ProductCategory", "ProductDescription", "ProductName", "ProductPrice" },
-                values: new object[,]
-                {
-                    { "1", "Seeder", new DateTime(2025, 6, 20, 18, 58, 13, 383, DateTimeKind.Utc).AddTicks(3694), "https://example.com/images/mouse.jpg", "Electronics", "Ergonomic wireless mouse with 2.4GHz connection", "Wireless Mouse", 29.99m },
-                    { "2", "Seeder", new DateTime(2025, 6, 20, 18, 58, 13, 383, DateTimeKind.Utc).AddTicks(3698), "https://example.com/images/speaker.jpg", "Audio", "Portable Bluetooth speaker with HD sound", "Bluetooth Speaker", 49.99m },
-                    { "3", "Seeder", new DateTime(2025, 6, 20, 18, 58, 13, 383, DateTimeKind.Utc).AddTicks(3701), "https://example.com/images/watch.jpg", "Wearables", "Fitness tracking smart watch with heart rate monitor", "Smart Watch", 99.99m }
-                });
         }
 
         /// <inheritdoc />

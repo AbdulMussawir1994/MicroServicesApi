@@ -49,36 +49,36 @@ namespace OrderApi.DbContextClass
 
             });
 
-            // 🌟 Seed Data
-            modelBuilder.Entity<OrderDetails>().HasData(
-                new OrderDetails
-                {
-                    OrderDetailsId = 1,
-                    ProductId = "1",
-                    ProductName = "Wireless Mouse",
-                    Count = 5,
-                    Price = 29.99m,
-                    CreatedDate = DateTime.UtcNow,
-                },
-                new OrderDetails
-                {
-                    OrderDetailsId = 2,
-                    ProductId = "2",
-                    ProductName = "Bluetooth Speaker",
-                    Count = 5,
-                    Price = 49.99m,
-                    CreatedDate = DateTime.UtcNow,
-                },
-                new OrderDetails
-                {
-                    OrderDetailsId = 3,
-                    ProductId = "3",
-                    ProductName = "Smart Watch",
-                    Count = 5,
-                    Price = 99.99m,
-                    CreatedDate = DateTime.UtcNow,
-                }
-            );
+            //// 🌟 Seed Data
+            //modelBuilder.Entity<OrderDetails>().HasData(
+            //    new OrderDetails
+            //    {
+            //        OrderDetailsId = 1,
+            //        ProductId = "1",
+            //        ProductName = "Wireless Mouse",
+            //        Stock = 5,
+            //        Price = 29.99m,
+            //        CreatedDate = DateTime.UtcNow,
+            //    },
+            //    new OrderDetails
+            //    {
+            //        OrderDetailsId = 2,
+            //        ProductId = "2",
+            //        ProductName = "Bluetooth Speaker",
+            //        Stock = 5,
+            //        Price = 49.99m,
+            //        CreatedDate = DateTime.UtcNow,
+            //    },
+            //    new OrderDetails
+            //    {
+            //        OrderDetailsId = 3,
+            //        ProductId = "3",
+            //        ProductName = "Smart Watch",
+            //        Stock = 5,
+            //        Price = 99.99m,
+            //        CreatedDate = DateTime.UtcNow,
+            //    }
+            //);
         }
 
         public DbSet<OrderDetails> OrderDetails => Set<OrderDetails>();

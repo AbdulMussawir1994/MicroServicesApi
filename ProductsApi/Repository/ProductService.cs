@@ -4,6 +4,7 @@ using ProductsApi.DataContextClass;
 using ProductsApi.DTOs;
 using ProductsApi.Helpers;
 using ProductsApi.Models;
+using ProductsApi.RabbitMqProducer;
 using ProductsApi.Utilities;
 
 namespace ProductsApi.Repository
@@ -12,11 +13,13 @@ namespace ProductsApi.Repository
     {
         private readonly DataContext _db;
         private readonly IContextUser _contextUser;
+        private readonly IRabbitMqService _rabbitMqService;
 
-        public ProductService(DataContext db, IContextUser contextUser)
+        public ProductService(DataContext db, IContextUser contextUser, IRabbitMqService rabbitMqService)
         {
             _db = db;
             _contextUser = contextUser;
+            _rabbitMqService = rabbitMqService;
         }
 
         public async Task<MobileResponse<IEnumerable<GetProductDto>>> GetAllAsync(CancellationToken ctx)
@@ -70,11 +73,15 @@ namespace ProductsApi.Repository
                     ProductDescription = product.ProductDescription,
                     ProductPrice = product.ProductPrice,
                     ProductCategory = product.ProductCategory,
-                    User = _contextUser?.Email ?? _contextUser.UserId
+                    Quantity = product.Quantity,
+                    Consumer = _contextUser?.Email ?? "Not Found",
+                    User = _contextUser?.UserId ?? "1"
                 };
 
+                _rabbitMqService.PublishMessage("ProductQueue", rabbitMq);
+
                 return result > 0
-                    ? MobileResponse<GetProductDto>.Success(product.Adapt<GetProductDto>(), "Product Created Successfully")
+                    ? MobileResponse<GetProductDto>.Success(product.Adapt<GetProductDto>(), "Product Created and message sent to RabbitMQ.")
                     : MobileResponse<GetProductDto>.Fail("Failed to Create Product");
             }
             catch (Exception ex)

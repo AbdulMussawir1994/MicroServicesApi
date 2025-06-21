@@ -45,7 +45,7 @@ namespace OrderApi.Repository
 
             order.ProductId = model.ProductId;
             order.ProductName = model.ProductName;
-            order.Count = model.Count;
+            order.Stock = model.Stock;
             order.Price = model.Price;
 
             _db.OrderDetails.Update(order);

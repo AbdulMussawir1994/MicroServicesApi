@@ -66,42 +66,42 @@ namespace ProductsApi.DataContextClass
                 .HasMaxLength(50);
             });
 
-            // 🌟 Seed Data
-            modelBuilder.Entity<Product>().HasData(
-                new Product
-                {
-                    ProductId = "1",
-                    ProductName = "Wireless Mouse",
-                    ProductDescription = "Ergonomic wireless mouse with 2.4GHz connection",
-                    ProductCategory = "Electronics",
-                    ProductPrice = 29.99m,
-                    ImageUrl = "https://example.com/images/mouse.jpg",
-                    CreatedDate = DateTime.UtcNow,
-                    CreatedBy = "Seeder"
-                },
-                new Product
-                {
-                    ProductId = "2",
-                    ProductName = "Bluetooth Speaker",
-                    ProductDescription = "Portable Bluetooth speaker with HD sound",
-                    ProductCategory = "Audio",
-                    ProductPrice = 49.99m,
-                    ImageUrl = "https://example.com/images/speaker.jpg",
-                    CreatedDate = DateTime.UtcNow,
-                    CreatedBy = "Seeder"
-                },
-                new Product
-                {
-                    ProductId = "3",
-                    ProductName = "Smart Watch",
-                    ProductDescription = "Fitness tracking smart watch with heart rate monitor",
-                    ProductCategory = "Wearables",
-                    ProductPrice = 99.99m,
-                    ImageUrl = "https://example.com/images/watch.jpg",
-                    CreatedDate = DateTime.UtcNow,
-                    CreatedBy = "Seeder"
-                }
-            );
+            //// 🌟 Seed Data
+            //modelBuilder.Entity<Product>().HasData(
+            //    new Product
+            //    {
+            //        ProductId = "1",
+            //        ProductName = "Wireless Mouse",
+            //        ProductDescription = "Ergonomic wireless mouse with 2.4GHz connection",
+            //        ProductCategory = "Electronics",
+            //        ProductPrice = 29.99m,
+            //        ImageUrl = "https://example.com/images/mouse.jpg",
+            //        CreatedDate = DateTime.UtcNow,
+            //        CreatedBy = "Seeder"
+            //    },
+            //    new Product
+            //    {
+            //        ProductId = "2",
+            //        ProductName = "Bluetooth Speaker",
+            //        ProductDescription = "Portable Bluetooth speaker with HD sound",
+            //        ProductCategory = "Audio",
+            //        ProductPrice = 49.99m,
+            //        ImageUrl = "https://example.com/images/speaker.jpg",
+            //        CreatedDate = DateTime.UtcNow,
+            //        CreatedBy = "Seeder"
+            //    },
+            //    new Product
+            //    {
+            //        ProductId = "3",
+            //        ProductName = "Smart Watch",
+            //        ProductDescription = "Fitness tracking smart watch with heart rate monitor",
+            //        ProductCategory = "Wearables",
+            //        ProductPrice = 99.99m,
+            //        ImageUrl = "https://example.com/images/watch.jpg",
+            //        CreatedDate = DateTime.UtcNow,
+            //        CreatedBy = "Seeder"
+            //    }
+            //);
         }
 
         public DbSet<Product> Products => Set<Product>();
