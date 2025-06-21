@@ -1,4 +1,5 @@
-﻿using MicroServicesApi.Dtos;
+﻿using KmacHelper.KMAC;
+using MicroServicesApi.Dtos;
 using MicroServicesApi.Helpers;
 using MicroServicesApi.Models;
 using MicroServicesApi.ViewModels;
@@ -75,7 +76,7 @@ namespace MicroServicesApi.Repository
             var audience = _config["JWTKey:ValidAudience"];
             var expiryMinutes = int.Parse(_config["JWTKey:TokenExpiryTimeInMinutes"] ?? "30");
 
-            var derivedKey = KmacHelper.DeriveKmacKey(userId, roles, email, Encoding.UTF8.GetBytes(secret));
+            var derivedKey = KmacHelperClass.DeriveKmacKey(userId, roles, email, Encoding.UTF8.GetBytes(secret));
 
             var claims = new List<Claim>
         {

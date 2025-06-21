@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using KmacHelper.KMAC;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -61,7 +62,7 @@ public static class WebApplicationBuilderExtensions
                     if (string.IsNullOrWhiteSpace(userId) || string.IsNullOrWhiteSpace(email) || roles.Count == 0)
                         throw new SecurityTokenException("Token is missing required claims.");
 
-                    var derivedKey = KmacHelper.DeriveKmacKey(userId, roles, email, baseKey);
+                    var derivedKey = KmacHelperClass.DeriveKmacKey(userId, roles, email, baseKey);
                     return new[] { new SymmetricSecurityKey(derivedKey) };
                 }
             };

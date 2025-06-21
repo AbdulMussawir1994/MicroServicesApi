@@ -1,9 +1,9 @@
 ﻿using Org.BouncyCastle.Crypto.Macs;
 using System.Text;
 
-namespace OrderApi.Helpers;
+namespace KmacHelper.KMAC;
 
-public static class KmacHelper
+public static class KmacHelperClass
 {
     public static byte[] DeriveKmacKey(string userId, IEnumerable<string> roles, string email, byte[] secret)
     {

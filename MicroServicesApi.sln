@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductsApi", "ProductsApi\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderApi", "OrderApi\OrderApi.csproj", "{E512B07C-B79D-4FC9-824B-D4F789D25692}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KmacHelper", "KmacHelper\KmacHelper.csproj", "{E49BD1B9-73B2-4E4F-A5E6-967795D7E8F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{E512B07C-B79D-4FC9-824B-D4F789D25692}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E512B07C-B79D-4FC9-824B-D4F789D25692}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E512B07C-B79D-4FC9-824B-D4F789D25692}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E49BD1B9-73B2-4E4F-A5E6-967795D7E8F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E49BD1B9-73B2-4E4F-A5E6-967795D7E8F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E49BD1B9-73B2-4E4F-A5E6-967795D7E8F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E49BD1B9-73B2-4E4F-A5E6-967795D7E8F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
