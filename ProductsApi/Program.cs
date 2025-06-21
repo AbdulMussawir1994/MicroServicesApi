@@ -4,6 +4,7 @@ using Microsoft.OpenApi.Models;
 using ProductsApi.DataContextClass;
 using ProductsApi.Helpers;
 using ProductsApi.Repository;
+using ProductsApi.Utilities;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -58,10 +59,13 @@ builder.Services.AddCors(options =>
 
 // ✅ Register Application Services
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IContextUser, ContextUser>();
 
 // ✅ Mapster Config for DTO Mapping
 TypeAdapterConfig.GlobalSettings.Scan(Assembly.GetExecutingAssembly());
 builder.Services.AddSingleton(new MapsterProfile());
+
+builder.Services.AddHttpContextAccessor();
 
 // JWT Authentication & Authorization
 builder.AddAppAuthentication();

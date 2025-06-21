@@ -1,15 +1,18 @@
-﻿namespace ProductsApi.Helpers
+﻿namespace ProductsApi.Helpers;
+
+public class MobileResponse<T>
 {
-    public class MobileResponse<T>
-    {
-        public T Data { get; set; }
-        public string Message { get; set; }
-        public bool IsSuccess { get; set; } = false;
+    public bool Status { get; set; }
+    public string Message { get; set; } = string.Empty;
+    public T? Data { get; set; }
+    public string Code { get; set; }
 
-        public static MobileResponse<T> Success(T data, string message = "Success", bool status = true) => new MobileResponse<T>() { Data = data, Message = message, IsSuccess = status };
+    public static MobileResponse<T> Success(T data, string message = "Success", string code = "200") =>
+        new() { Status = true, Message = message, Data = data, Code = code };
 
-        public static MobileResponse<T> Fail(string message, bool status = false) => new MobileResponse<T>() { Message = message, IsSuccess = status };
+    public static MobileResponse<T> Fail(string message = "Failure", string code = "400") =>
+        new() { Status = false, Message = message, Code = code };
 
-        public static MobileResponse<T> EmptySuccess(T data, string message = "Success") => new() { IsSuccess = true, Message = message, Data = data };
-    }
+    public static MobileResponse<T> EmptySuccess(T data, string message = "Success", string code = "200") =>
+        new() { Status = true, Message = message, Data = data, Code = code };
 }

@@ -15,19 +15,19 @@ namespace MicroServicesApi.Controllers
 
         [HttpPost("LoginUser")]
         [AllowAnonymous]
-        public async Task<IActionResult> LoginUser([FromBody] LoginViewModel model, CancellationToken cancellationToken)
+        public async Task<ActionResult> LoginUser([FromBody] LoginViewModel model, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             var result = await _userService.LoginUser(model, cancellationToken);
-            return result.Status ? Ok(result) : BadRequest(result);
+            return result.Code == "200" ? Ok(result) : BadRequest(result);
         }
 
         [HttpPost("RegisterUser")]
-        // [AllowAnonymous]
-        [Authorize]
-        public async Task<IActionResult> RegisterUser([FromBody] RegisterViewModel model, CancellationToken cancellationToken)
+        [AllowAnonymous]
+        //[Authorize]
+        public async Task<ActionResult> RegisterUser([FromBody] RegisterViewModel model, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

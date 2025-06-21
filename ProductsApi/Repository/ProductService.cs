@@ -4,16 +4,19 @@ using ProductsApi.DataContextClass;
 using ProductsApi.DTOs;
 using ProductsApi.Helpers;
 using ProductsApi.Models;
+using ProductsApi.Utilities;
 
 namespace ProductsApi.Repository
 {
     public class ProductService : IProductService
     {
         private readonly DataContext _db;
+        private readonly IContextUser _contextUser;
 
-        public ProductService(DataContext db)
+        public ProductService(DataContext db, IContextUser contextUser)
         {
             _db = db;
+            _contextUser = contextUser;
         }
 
         public async Task<MobileResponse<IEnumerable<GetProductDto>>> GetAllAsync(CancellationToken ctx)
@@ -55,8 +58,20 @@ namespace ProductsApi.Repository
             try
             {
                 var product = model.Adapt<Product>();
+                product.CreatedBy = _contextUser.UserId;
+
                 await _db.Products.AddAsync(product, ctx);
                 var result = await _db.SaveChangesAsync(ctx);
+
+                var rabbitMq = new ProductMessageDto
+                {
+                    ProductId = product.ProductId,
+                    ProductName = product.ProductName,
+                    ProductDescription = product.ProductDescription,
+                    ProductPrice = product.ProductPrice,
+                    ProductCategory = product.ProductCategory,
+                    User = _contextUser?.Email ?? _contextUser.UserId
+                };
 
                 return result > 0
                     ? MobileResponse<GetProductDto>.Success(product.Adapt<GetProductDto>(), "Product Created Successfully")
@@ -128,7 +143,7 @@ namespace ProductsApi.Repository
             }
             catch (Exception ex)
             {
-                return MobileResponse<IEnumerable<GetProductDto>>.Fail($"An error Occured: {ex.Message}", false);
+                return MobileResponse<IEnumerable<GetProductDto>>.Fail($"An error Occured: {ex.Message}", "400");
             }
         }
     }

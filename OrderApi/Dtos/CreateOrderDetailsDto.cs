@@ -5,7 +5,7 @@ namespace OrderApi.Dtos
 {
     public class CreateOrderDetailsDto
     {
-        [Required]
+        [Required, MaxLength(36)]
         public string ProductId { get; set; } = string.Empty; // = Guid.NewGuid().ToString();
 
         [Required]

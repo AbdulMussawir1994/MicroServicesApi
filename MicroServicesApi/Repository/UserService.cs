@@ -51,10 +51,10 @@ namespace MicroServicesApi.Repository
         {
             var user = await _users.Find(x => x.CNIC == model.CNIC).FirstOrDefaultAsync(ct);
             if (user is null)
-                return MobileResponse<LoginResponseModel>.Fail("CNIC is invalid.");
+                return MobileResponse<LoginResponseModel>.Fail("CNIC is invalid.", "404");
 
             if (!BCrypt.Net.BCrypt.Verify(model.Password, user.PasswordHash))
-                return MobileResponse<LoginResponseModel>.Fail("Password is invalid.");
+                return MobileResponse<LoginResponseModel>.Fail("Password is invalid.", "404");
 
             var jwt = GenerateKmacJwtToken(user.Id, user.Roles, user.Email);
             var expiryMinutes = _config.GetValue<int>("JWTKey:TokenExpiryTimeInMinutes");
@@ -66,7 +66,7 @@ namespace MicroServicesApi.Repository
                 AccessToken = jwt,
                 ExpireTokenTime = expireTime,
                 //RefreshToken = "" // add refresh logic if needed
-            }, "Login Successful");
+            }, "Login Successful", "200");
         }
 
         private string GenerateKmacJwtToken(string userId, IEnumerable<string> roles, string email)

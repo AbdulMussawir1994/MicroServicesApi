@@ -16,7 +16,19 @@ namespace ProductsApi.DTOs
 
         [Column(TypeName = "decimal(18,2)")]
         public decimal ProductPrice { get; set; }
+        public IFormFile? ImageUrl { get; set; }
+    }
 
-        public string? ImageUrl { get; set; } // Base64, no MaxLength since it's large
+    public class ProductMessageDto
+    {
+        public string User { get; set; } = string.Empty;
+        public string ProductId { get; set; } = string.Empty;
+        public string ProductName { get; set; } = string.Empty;
+        public string? ProductDescription { get; set; }
+        public string? ProductCategory { get; set; }
+        public decimal ProductPrice { get; set; }
+        public IFormFile? ImageUrl { get; set; }
+        public DateTime DateCreated { get; set; }
+        public DateTime DateModified { get; set; } = DateTime.UtcNow;
     }
 }
