@@ -66,20 +66,6 @@ namespace ProductsApi.Repository
                 await _db.Products.AddAsync(product, ctx);
                 var result = await _db.SaveChangesAsync(ctx);
 
-                var rabbitMq = new ProductMessageDto
-                {
-                    ProductId = product.ProductId,
-                    ProductName = product.ProductName,
-                    ProductDescription = product.ProductDescription,
-                    ProductPrice = product.ProductPrice,
-                    ProductCategory = product.ProductCategory,
-                    Quantity = product.Quantity,
-                    Consumer = _contextUser?.Email ?? "Not Found",
-                    User = _contextUser?.UserId ?? "1"
-                };
-
-                _rabbitMqService.PublishMessage("ProductQueue", rabbitMq);
-
                 return result > 0
                     ? MobileResponse<GetProductDto>.Success(product.Adapt<GetProductDto>(), "Product Created and message sent to RabbitMQ.")
                     : MobileResponse<GetProductDto>.Fail("Failed to Create Product");

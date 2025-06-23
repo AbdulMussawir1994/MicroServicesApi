@@ -70,7 +70,7 @@ public class OrderAcknowledged : BackgroundService
                 var json = Encoding.UTF8.GetString(body);
                 _logger.LogInformation($"Received raw JSON: {json}");
 
-                var message = JsonSerializer.Deserialize<Product>(body);
+                var message = JsonSerializer.Deserialize<ProductDto>(body);
                 if (message == null)
                 {
                     _logger.LogWarning("Received a null or malformed message.");
@@ -80,7 +80,7 @@ public class OrderAcknowledged : BackgroundService
 
                 _logger.LogInformation($"Processing product: {message.ProductName} (ID: {message.ProductId})");
 
-                await ProcessOrderAsync(message);
+                //    await ProcessOrderAsync(message);
 
                 _channel.BasicAck(ea.DeliveryTag, false);
                 _logger.LogInformation($"Successfully processed product: {message.ProductName}");
@@ -102,10 +102,10 @@ public class OrderAcknowledged : BackgroundService
         return Task.CompletedTask;
     }
 
-    private async Task ProcessOrderAsync(Product product)
-    {
-        await _serviceProvider.AutoCreateAsync(product);
-    }
+    //private async Task ProcessOrderAsync(ProductDto product)
+    //{
+    //    await _serviceProvider.AutoCreateAsync(product);
+    //}
 
     public override Task StopAsync(CancellationToken cancellationToken)
     {

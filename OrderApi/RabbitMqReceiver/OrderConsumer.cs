@@ -61,7 +61,7 @@ public class OrderConsumer : BackgroundService
 
                     _logger.LogInformation($"Received raw JSON: {json}");
 
-                    var product = JsonSerializer.Deserialize<Product>(json, new JsonSerializerOptions
+                    var product = JsonSerializer.Deserialize<ProductDto>(json, new JsonSerializerOptions
                     {
                         PropertyNameCaseInsensitive = true
                     });
@@ -112,7 +112,7 @@ public class OrderConsumer : BackgroundService
         return Task.CompletedTask;
     }
 
-    private async Task ProcessOrderAsync(Product product, CancellationToken cancellationToken)
+    private async Task ProcessOrderAsync(ProductDto product, CancellationToken cancellationToken)
     {
         using var scope = _serviceProvider.CreateScope();
         var dbContext = scope.ServiceProvider.GetRequiredService<DataDbContext>();
@@ -121,12 +121,12 @@ public class OrderConsumer : BackgroundService
         {
             ProductId = product.ProductId,
             ProductName = product.ProductName,
-            Stock = product.Quantity,
-            Consumer = product.Consumer ?? "Unknown Customer",
+            //    Stock = product.Quantity,
+            //     Consumer = product.Consumer ?? "Unknown Customer",
             Status = "Confirmed",
             CreatedDate = DateTime.UtcNow,
-            Price = product.ProductPrice,
-            UserId = product.User,
+            //Price = product.ProductPrice,
+            //    UserId = product.User,
         };
 
         await dbContext.OrderDetails.AddAsync(order, cancellationToken);

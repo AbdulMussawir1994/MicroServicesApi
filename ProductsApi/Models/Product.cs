@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ProductsApi.Models;
 
 [Table("Product")]
-public class Product
+public class Product //MySql Server
 {
     [Key]
     [MaxLength(36)]
@@ -22,12 +22,15 @@ public class Product
     [Column(TypeName = "decimal(18,2)")]
     public decimal ProductPrice { get; set; }
 
-    [Column(TypeName = "decimal(18,2)")]
-    public decimal Quantity { get; set; }
-
     public string? ImageUrl { get; set; } // Base64, no MaxLength since it's large
 
     public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
+    public DateTime? UpdatedDate { get; set; }
+
     [MaxLength(50)]
-    public string? CreatedBy { get; set; } = string.Empty;
+    public string? CreatedBy { get; set; } = string.Empty; // UserId
+    public string? UpdatedBy { get; set; } = string.Empty;
+
+
+
 }

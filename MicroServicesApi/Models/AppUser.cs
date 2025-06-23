@@ -17,8 +17,6 @@ public class AppUser
     [BsonElement("CNIC")]
     public string CNIC { get; set; }
 
-    public long? CreatedBy { get; set; }
-
     [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
     public DateTime DateCreated { get; set; } = DateTime.UtcNow;
 
@@ -26,11 +24,6 @@ public class AppUser
 
     [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
     public DateTime? UpdatedDate { get; set; }
-
-    public string? CurrentGuid { get; set; }
-    public string? RefreshGuid { get; set; }
-    public string? DeviceId { get; set; }
-    public bool? IsDeviceChanged { get; set; }
 
     [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
     public DateTime? LastLoginDate { get; set; }

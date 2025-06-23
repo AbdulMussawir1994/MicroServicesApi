@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using OrderApi.DbContextClass;
 using OrderApi.Helpers;
+using OrderApi.RabbitMqConsumer;
 using OrderApi.RabbitMqReceiver;
 using OrderApi.Repository;
 using OrderApi.Utilities.ContextHelper;
@@ -52,6 +53,7 @@ builder.Services.AddCors(options =>
 // ✅ Register Application Services
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IContextUser, ContextUser>();
+builder.Services.AddScoped<IRabbitMqConsumerService, RabbitMqConsumerService>();
 
 // Add Hosted Service for RabbitMQ Consumer
 builder.Services.AddHostedService<OrderConsumer>();
@@ -60,6 +62,15 @@ builder.Services.AddHostedService<OrderConsumer>();
 TypeAdapterConfig.GlobalSettings.Scan(Assembly.GetExecutingAssembly());
 builder.Services.AddSingleton(new MapsterProfile());
 
+
+//builder.Services.AddHttpClient(); // Required for IHttpClientFactory
+builder.Services.AddHttpClient("ProductApi", client =>
+{
+    client.BaseAddress = new Uri("https://api.example.com/"); // ⬅️ Change this to your actual API base URL
+    client.DefaultRequestHeaders.Add("Accept", "application/json");
+    // Optionally add API key headers here if needed:
+    // client.DefaultRequestHeaders.Add("Authorization", "Bearer your_api_key");
+});
 
 builder.Services.AddHttpContextAccessor();
 
@@ -114,6 +125,21 @@ builder.Services.AddResponseCaching();
 // ----------------------------- App Pipeline -----------------------------
 
 var app = builder.Build();
+
+// ✅ Set OrderId seed to start from 1000
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<DataDbContext>();
+
+    // If using migrations:
+    // await dbContext.Database.MigrateAsync();
+
+    // Optional safety check
+    if (!dbContext.OrderDetails.Any())
+    {
+        await dbContext.Database.ExecuteSqlRawAsync("DBCC CHECKIDENT ('OrderDetails', RESEED, 999)");
+    }
+}
 
 // Swagger for development only
 if (app.Environment.IsDevelopment())

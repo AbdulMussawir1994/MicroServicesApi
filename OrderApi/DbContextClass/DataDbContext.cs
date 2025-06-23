@@ -30,8 +30,8 @@ namespace OrderApi.DbContextClass
             {
                 entity.ToTable("OrderDetails");
 
-                entity.HasKey(e => e.OrderDetailsId);
-                entity.HasIndex(u => u.OrderDetailsId).IsUnique().HasDatabaseName("IDX_OrderDetailsId)");
+                entity.HasKey(e => e.OrderId);
+                entity.HasIndex(u => u.OrderId).IsUnique().HasDatabaseName("IDX_OrderId)");
 
                 entity.Property(e => e.ProductId)
                     .HasMaxLength(36)

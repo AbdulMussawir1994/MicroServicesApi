@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OrderApi.Dtos;
+using OrderApi.RabbitMqConsumer;
 using OrderApi.Repository;
 
 namespace OrderApi.Controllers
@@ -11,10 +12,19 @@ namespace OrderApi.Controllers
     public class OrderDetailsController : ControllerBase
     {
         private readonly IOrderService _orderService;
+        private readonly IRabbitMqConsumerService _consumerService;
 
-        public OrderDetailsController(IOrderService orderService)
+        public OrderDetailsController(IOrderService orderService, IRabbitMqConsumerService consumerService)
         {
             _orderService = orderService;
+            _consumerService = consumerService;
+        }
+
+        [HttpPost("confirm")]
+        public async Task<IActionResult> ConfirmOrder()
+        {
+            var result = await _consumerService.ConfirmOrderAsync();
+            return Ok(result);
         }
 
         [HttpGet("List")]
